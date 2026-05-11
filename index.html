@@ -1,0 +1,332 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  HeartHandshake, 
+  BrainCircuit, 
+  Clock, 
+  BookOpenCheck, 
+  Instagram, 
+  MessageCircle, 
+  Mail, 
+  MapPin, 
+  Menu, 
+  X, 
+  User
+} from 'lucide-react';
+
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Configura o favicon dinamicamente
+    const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel = 'icon';
+    // SVG codificado criando um círculo na cor primary com o 'M' em itálico
+    link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23541F40"/><text x="50" y="55" font-family="serif" font-size="55" font-style="italic" fill="white" dominant-baseline="middle" text-anchor="middle">M</text></svg>';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    
+    // Aproveitando para ajustar o título do separador
+    document.title = "Agência Mythos | Psicologia";
+  }, []);
+
+  // Paleta de cores 
+  const colors = {
+    primary: '#541F40',    // Vinho/Ameixa (Ações, Destaques, Títulos principais)
+    secondary: '#8E7E9F',  // Lilás Acinzentado (Apoio, fundos de seção suaves)
+    accent: '#84D1F0',     // Azul Claro (Ícones, detalhes vibrantes, badges)
+    background: '#F2ECB4', // Amarelo Pastel (Fundos de seção acolhedores, detalhes)
+    textDark: '#4A4A4A',   // Cinza Escuro (Texto principal para contraste acessível)
+    white: '#FFFFFF'       // Branco (Fundos de cards e texto sobre cores escuras)
+  };
+
+  const services = [
+    {
+      title: "Psicoterapia/Análise",
+      description: "Um espaço de escuta acolhedora e crítica. Buscamos compreender o sofrimento em sua dimensão singular e social, promovendo a elaboração de conflitos e a construção de autonomia.",
+      icon: <HeartHandshake size={32} color={colors.primary} />
+    },
+    {
+      title: "Avaliação Neuropsicológica",
+      description: "Investigação aprofundada das funções cognitivas (memória, atenção, raciocínio) para auxiliar em diagnósticos precisos.",
+      icon: <BrainCircuit size={32} color={colors.primary} />
+    },
+    {
+      title: "Plantão Psicológico",
+      description: "Acolhimento pontual e imediato para momentos de crise, oferecendo suporte emocional quando você mais precisa.",
+      icon: <Clock size={32} color={colors.primary} />
+    },
+    {
+      title: "Supervisão Clínica",
+      description: "Espaço de troca e orientação técnica para psicólogos e psicanalistas que buscam aprimorar sua prática clínica.",
+      icon: <BookOpenCheck size={32} color={colors.primary} />
+    }
+  ];
+
+  const team = [
+    {
+      name: "Fulano",
+      role: "Psicanalista",
+      crp: "CRP xx/xxxxx",
+      bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+      instagram: "@fulano.psi"
+    },
+    {
+      name: "Ciclano",
+      role: "Neuropsicólogo",
+      crp: "CRP xx/xxxxx",
+      bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+      instagram: "@ciclano.neuro"
+    },
+    {
+      name: "Beltrano",
+      role: "Psicóloga Clínica",
+      crp: "CRP xx/xxxxx",
+      bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+      instagram: "@beltrano.clinica"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen font-sans selection:bg-[#84D1F0] selection:text-[#541F40] scroll-smooth bg-white text-[#4A4A4A]">
+      
+      {/* Link de Acessibilidade (Pular para conteúdo) */}
+      <a href="#conteudo-principal" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:p-4 focus:bg-[#541F40] focus:text-white rounded-md">
+        Pular para o conteúdo principal
+      </a>
+
+      {/* Cabeçalho / Navegação */}
+      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-[#8E7E9F]/20 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm" style={{ backgroundColor: colors.primary }}>
+                <span className="text-white font-serif text-2xl italic">M</span>
+              </div>
+              <span className="font-serif text-2xl font-bold tracking-tight" style={{ color: colors.primary }}>
+                mythos
+              </span>
+            </div>
+
+            {/* Menu Desktop */}
+            <nav className="hidden md:flex space-x-8" aria-label="Navegação principal">
+              <a href="#servicos" className="text-[#4A4A4A] hover:text-[#541F40] font-medium transition-colors border-b-2 border-transparent hover:border-[#541F40] py-2">Serviços</a>
+              <a href="#equipe" className="text-[#4A4A4A] hover:text-[#541F40] font-medium transition-colors border-b-2 border-transparent hover:border-[#541F40] py-2">Nossa Equipe</a>
+              <a href="#conteudo" className="text-[#4A4A4A] hover:text-[#541F40] font-medium transition-colors border-b-2 border-transparent hover:border-[#541F40] py-2">Conteúdo</a>
+            </nav>
+
+            <div className="hidden md:flex">
+              <a href="#contato" 
+                 className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent rounded-full shadow-sm text-base font-medium text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#541F40]"
+                 style={{ backgroundColor: colors.primary }}>
+                Agendar Consulta
+              </a>
+            </div>
+
+            {/* Botão Menu Mobile */}
+            <div className="md:hidden flex items-center">
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-md text-[#4A4A4A] hover:text-[#541F40] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#541F40]"
+                aria-expanded={isMenuOpen}
+                aria-label="Abrir menu"
+              >
+                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Menu Mobile Expandido */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-[#8E7E9F]/20 shadow-lg">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <a href="#servicos" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-[#4A4A4A] hover:text-[#541F40] hover:bg-[#8E7E9F]/10">Serviços</a>
+              <a href="#equipe" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-[#4A4A4A] hover:text-[#541F40] hover:bg-[#8E7E9F]/10">Nossa Equipe</a>
+              <a href="#conteudo" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-[#4A4A4A] hover:text-[#541F40] hover:bg-[#8E7E9F]/10">Conteúdo</a>
+              <a href="#contato" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 mt-4 text-center rounded-md text-base font-medium text-white shadow-sm" style={{ backgroundColor: colors.primary }}>Agendar Consulta</a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main id="conteudo-principal">
+        {/* Seção Hero - Fundo Amarelo Pastel Suave */}
+        <section className="relative overflow-hidden py-20 sm:py-28 lg:py-36" style={{ backgroundColor: `${colors.background}60` }}>
+          {/* Elementos decorativos mais vibrantes */}
+          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 rounded-full opacity-40 blur-3xl" style={{ backgroundColor: colors.accent }} aria-hidden="true"></div>
+          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full opacity-30 blur-3xl" style={{ backgroundColor: colors.secondary }} aria-hidden="true"></div>
+          
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight mb-6 drop-shadow-sm" style={{ color: colors.primary }}>
+              Construindo novos sentidos <br className="hidden md:block" /> para a sua história.
+            </h1>
+            <p className="mt-6 text-xl sm:text-2xl max-w-3xl mx-auto leading-relaxed text-[#4A4A4A] font-medium">
+              Na <strong className="font-bold" style={{ color: colors.primary }}>Agência Mythos</strong>, oferecemos um espaço ético, acessível e acolhedor. Nossa equipe multidisciplinar está pronta para ouvir você.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
+              <a href="#contato" 
+                 className="inline-flex items-center justify-center px-8 py-4 border border-transparent rounded-full shadow-lg text-lg font-medium text-white transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#541F40]"
+                 style={{ backgroundColor: colors.primary }}>
+                <MessageCircle className="mr-2 -ml-1 h-5 w-5" />
+                Falar pelo WhatsApp
+              </a>
+              <a href="#servicos" 
+                 className="inline-flex items-center justify-center px-8 py-4 border-2 rounded-full text-lg font-medium transition-colors hover:bg-white/70 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#4A4A4A]"
+                 style={{ borderColor: colors.primary, color: colors.primary, backgroundColor: 'transparent' }}>
+                Conhecer nossos serviços
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção de Serviços - Fundo Lilás Suave */}
+        <section id="servicos" className="py-20 sm:py-28 relative" style={{ backgroundColor: `${colors.secondary}15` }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold" style={{ color: colors.primary }}>Como podemos ajudar</h2>
+              <p className="mt-4 text-lg max-w-2xl mx-auto text-[#4A4A4A]">Compreendemos que cada jornada é única. Por isso, oferecemos diferentes frentes de cuidado.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              {services.map((service, index) => (
+                <div key={index} className="bg-white rounded-2xl p-8 shadow-sm border border-[#8E7E9F]/20 hover:shadow-md transition-shadow relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 w-2 h-full transition-all duration-300 group-hover:w-3" style={{ backgroundColor: colors.accent }}></div>
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 rounded-xl mr-4" style={{ backgroundColor: `${colors.accent}25` }}>
+                      {service.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold" style={{ color: colors.primary }}>{service.title}</h3>
+                  </div>
+                  <p className="text-lg leading-relaxed text-[#4A4A4A]">{service.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Seção Equipe - Fundo Amarelo Pastel Suave */}
+        <section id="equipe" className="py-20 sm:py-28 relative" style={{ backgroundColor: `${colors.background}30` }}>
+          {/* Elemento decorativo sutil */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-transparent pointer-events-none"></div>
+          
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold" style={{ color: colors.primary }}>Nossos Profissionais</h2>
+              <p className="mt-4 text-lg max-w-2xl mx-auto text-[#4A4A4A]">Uma equipe plural, altamente qualificada e comprometida com a ética do cuidado.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {team.map((member, index) => (
+                <div key={index} className="flex flex-col items-center text-center p-8 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow border border-[#F2ECB4]/40">
+                  {/* Placeholder para foto */}
+                  <div className="w-36 h-36 rounded-full mb-6 flex items-center justify-center overflow-hidden border-4 border-white shadow-md" style={{ backgroundColor: colors.secondary }}>
+                    <User size={56} color="white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-1" style={{ color: colors.primary }}>{member.name}</h3>
+                  <div className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-3" style={{ backgroundColor: `${colors.accent}30`, color: colors.primary }}>
+                    {member.role}
+                  </div>
+                  <span className="text-sm mb-5 font-mono text-[#8E7E9F] font-semibold">{member.crp}</span>
+                  <p className="text-base leading-relaxed text-[#4A4A4A] mb-6">{member.bio}</p>
+                  <a href="#" className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold hover:underline transition-all" style={{ color: colors.primary }}>
+                    <Instagram size={18} />
+                    {member.instagram}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Seção Blog / Instagram (Card com fundo colorido) */}
+        <section id="conteudo" className="py-20 sm:py-32 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center p-10 sm:p-16 rounded-3xl shadow-lg border border-[#8E7E9F]/10 relative overflow-hidden">
+               {/* Fundo gradiente suave no card */}
+               <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-[#F2ECB4] via-white to-[#8E7E9F] pointer-events-none"></div>
+               
+               <div className="relative z-10">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm" style={{ backgroundColor: colors.white, color: colors.primary }}>
+                  <Instagram size={32} />
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6" style={{ color: colors.primary }}>Psicologia em pauta</h2>
+                <p className="text-lg md:text-xl mb-10 text-[#4A4A4A] leading-relaxed max-w-2xl mx-auto">
+                  Acreditamos na psicoeducação. Nossos profissionais escrevem regularmente sobre saúde mental, psicanálise, neurociência e bem-estar. Acompanhe nossas reflexões.
+                </p>
+                <div className="flex justify-center">
+                  <a href="#" className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white transition-transform hover:scale-105 focus:ring-4 focus:ring-offset-2 focus:ring-[#541F40] shadow-md" style={{ backgroundColor: colors.primary }}>
+                    <Instagram size={22} />
+                    Siga no Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Rodapé e Contato - Fundo Lilás Suave */}
+      <footer id="contato" className="pt-16 pb-8 border-t border-[#8E7E9F]/30" style={{ backgroundColor: `${colors.secondary}20` }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center shadow-sm" style={{ backgroundColor: colors.primary }}>
+                  <span className="text-white font-serif text-xl italic">M</span>
+                </div>
+                <span className="font-serif text-2xl font-bold" style={{ color: colors.primary }}>mythos</span>
+              </div>
+              <p className="max-w-md text-base leading-relaxed text-[#4A4A4A]">
+                Uma agência de psicologia comprometida com a ética do cuidado. Acolhemos a singularidade de cada sujeito, compreendendo que a saúde mental é inseparável do nosso tempo e contexto social.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-lg mb-6" style={{ color: colors.primary }}>Contatos</h4>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-[#4A4A4A]">
+                  <MessageCircle size={20} className="mt-1 flex-shrink-0" style={{ color: colors.primary }} />
+                  <div>
+                    <span className="block font-semibold">WhatsApp</span>
+                    <a href="#" className="hover:text-[#541F40] transition-colors">(11) 99999-9999</a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3 text-[#4A4A4A]">
+                  <Mail size={20} className="mt-1 flex-shrink-0" style={{ color: colors.primary }} />
+                  <div>
+                    <span className="block font-semibold">E-mail</span>
+                    <a href="mailto:contato@agenciamythos.com.br" className="hover:text-[#541F40] transition-colors">contato@agenciamythos.com.br</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-lg mb-6" style={{ color: colors.primary }}>Atendimento</h4>
+              <ul className="space-y-4 text-[#4A4A4A]">
+                <li className="flex items-start gap-3">
+                  <MapPin size={20} className="mt-1 flex-shrink-0" style={{ color: colors.primary }} />
+                  <span className="leading-relaxed">
+                    Atendimentos presenciais e sessões online.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          
+          <div className="pt-8 border-t border-[#8E7E9F]/30 text-sm flex flex-col md:flex-row justify-between items-center gap-4 text-[#8E7E9F]">
+            <p>
+              © {new Date().getFullYear()} Agência Mythos. Desenvolvido por <a href="https://github.com/SEUGITHUB" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline" style={{ color: colors.primary }}>May.</a>
+            </p>
+            <p className="flex items-center gap-1">
+              Desenvolvido com foco em <span className="font-semibold underline decoration-[#84D1F0] decoration-2 text-[#4A4A4A]">acessibilidade</span>.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
